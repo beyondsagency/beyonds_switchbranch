@@ -1,0 +1,22 @@
+{
+    "name": "beyonds/beyonds_switchbranch",
+    "description": "Switch and show branches",
+    "autoload": {
+        "psr-4": {
+            "PrestaShop\\Module\\Beyonds_switchbranch\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "PululuK",
+            "email": "pululu.kinanga@beyonds.fr"
+        }
+    ],
+    "require": {
+        "czproject/git-php": "^4.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16.1",
+        "phpunit/phpunit": "~8.5.16"
+    }
+}
