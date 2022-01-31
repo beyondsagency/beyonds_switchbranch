@@ -33,7 +33,6 @@ $(document).ready(function(){
             params : {
                 branch_name: $(this).data('branch-name')
             },
-            submitBeyondsGitAjax: true,
         }
         let needConfirmation = $(this).data('is-technical');
 
@@ -48,7 +47,6 @@ $(document).ready(function(){
         let data = {
             action : 'Pull',
             params: {},
-            submitBeyondsGitAjax: true,
         }
 
         ajaxQuery(data, ajax_url, reload_page_after);
