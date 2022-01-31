@@ -25,6 +25,7 @@
 namespace PrestaShop\Module\Beyonds_switchbranch\Ajax\Request;
 
 use PrestaShop\Module\Beyonds_switchbranch\Ajax\Request\RequestInterface;
+use PrestaShop\Module\Beyonds_switchbranch\Ajax\Response\ResponseInterface;
 use PrestaShop\Module\Beyonds_switchbranch\Ajax\Exception\RequestNotFoundException;
 use Exception;
 
@@ -32,13 +33,17 @@ class RequestFinder
 {
     const GIT_REQUESTS_NAMESPACE = 'PrestaShop\Module\Beyonds_switchbranch\Ajax\Request\Git\\';
 
-    public static function find($actionName, $responseType)
+    public function find($actionName, $responseType)
     {
         if (empty($actionName)) {
             throw new RequestNotFoundException('Missing action name');
         }
 
-        $fullClassName = static::getFullClassName($actionName);
+        if(!($responseType instanceof ResponseInterface)){
+            throw new RequestNotFoundException('Invalid response type');
+        }
+
+        $fullClassName = $this->getFullClassName($actionName);
 
         if (class_exists($fullClassName)) {
             try {
@@ -54,7 +59,7 @@ class RequestFinder
         }
     }
 
-    private static function getFullClassName($actionName)
+    private function getFullClassName($actionName)
     {
         return static::GIT_REQUESTS_NAMESPACE.$actionName;
     }
