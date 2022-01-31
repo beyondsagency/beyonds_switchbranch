@@ -50,7 +50,7 @@ $(MySelector).click(function(){
      let data = {
          action : 'DeleteBranch',
          params : {
-            branch_name: $(this).data('branch-name')
+            my_branch_name: $(this).data('branch-name')
          },
      }
      
