@@ -1,82 +1,47 @@
-name: PHP
-on: [ push, pull_request ]
+name: PHP tests
+on: [push, pull_request]
 jobs:
+  # Check there is no syntax errors in the project
+  php-linter:
+    name: PHP Syntax check 7.2|7.3|7.4
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
+      - name: PHP syntax checker 7.2
+        uses: prestashop/github-action-php-lint/7.2@master
+
+      - name: PHP syntax checker 7.3
+        uses: prestashop/github-action-php-lint/7.3@master
+
+      - name: PHP syntax checker 7.4
+        uses: prestashop/github-action-php-lint/7.4@master
+
+  # Check the PHP code follow the coding standards
   php-cs-fixer:
-    name: PHP CS Fixer
+    name: PHP-CS-Fixer
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
-        with:
-          access_token: ${{ github.token }}
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
-          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv
-      - uses: actions/checkout@v2
+          php-version: '7.4'
 
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
 
-      - name: Cache Composer Directory
+      - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
 
-      - name: Validate composer config
-        run: composer validate --strict
+      - name: Install dependencies
+        run: composer install
 
-      - name: Composer Install
-        run: composer install --ansi --prefer-dist --no-interaction --no-progress
-
-      - name: Run PHPCSFixer
-        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff
-
-      - name: Run ergebnis/composer-normalize
-        run: composer normalize --dry-run --no-check-lock
-
-  phpstan:
-    name: PHP Static Analysis
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: [ '7.2', '7.3', '7.4']
-      fail-fast: false
-    steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.0
-        with:
-          access_token: ${{ github.token }}
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: mbstring, intl, gd, xml, dom, json, fileinfo, curl, zip, iconv, simplexml
-
-      - uses: actions/checkout@v2
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache Composer Directory
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Composer Install
-        run: composer install --ansi --prefer-dist --no-interaction --no-progress
-
-      - name: Run phpstan
-        run: ./vendor/bin/phpstan analyse -c phpstan.neon.dist
+      - name: Run PHP-CS-Fixer
+        run: ./vendor/bin/php-cs-fixer fix --dry-run --diff --using-cache=no --diff-format udiff
 
   phpunit:
     name: PHPUnit
