@@ -64,3 +64,7 @@ $(MySelector).click(function(){
  });
 
 ```
+
+## License
+
+This module is released under the [MIT Licence](https://opensource.org/licenses/MIT)
