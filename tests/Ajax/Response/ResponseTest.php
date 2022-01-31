@@ -74,6 +74,9 @@ final class ResponseTest extends TestCase {
         $response = new DefaultResponse('message', 1, []);
 
         $this->assertEquals($defaultResponseFactory, $response);
+        $this->assertEquals($defaultResponseFactory->setMessage('yep'), $response->setMessage('yep'));
+        $this->assertNotEquals($defaultResponseFactory, $response->setMessage('messages'));
+        $this->assertNotEquals($defaultResponseFactory->setStatus(1), $response->setStatus(true));
     }
 
     private function getResponseData(){
