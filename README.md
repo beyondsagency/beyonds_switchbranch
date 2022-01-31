@@ -6,7 +6,7 @@
 
 # Config
 
-![image](https://user-images.githubusercontent.com/16455155/151821224-0fcb8ed6-421a-42d7-a655-0e35d99639fc.png)
+![image](https://user-images.githubusercontent.com/16455155/151838754-ceb23af0-6c26-4b75-a0f8-35434caee477.png)
 
 | Var                                             | Description                                       | Default
 | ------------------------------------------------| --------------------------------------------------|------------------------
