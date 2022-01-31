@@ -1,6 +1,7 @@
 {
     "name": "beyonds/beyonds_switchbranch",
     "description": "Switch and show branches",
+    "license": "MIT License ",
     "autoload": {
         "psr-4": {
             "PrestaShop\\Module\\Beyonds_switchbranch\\": "src/"
