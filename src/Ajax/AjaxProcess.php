@@ -51,7 +51,7 @@ class AjaxProcess
     {
         $responseObject = $this->response;
         try {
-            $request = RequestFinder::find($this->action, $responseObject);
+            $request = (new RequestFinder())->find($this->action, $responseObject);
             $request->exec($this->params);
             $responseObject = $request->getResponse();
         } catch (RequestNotFoundException $requestNotFoundException) {
