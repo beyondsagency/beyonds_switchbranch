@@ -17,6 +17,6 @@
         "czproject/git-php": "^4.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16.1",
+        "friendsofphp/php-cs-fixer": "^2.16.1"
     }
 }
