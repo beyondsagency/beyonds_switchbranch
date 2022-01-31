@@ -138,7 +138,8 @@ class Beyonds_switchbranch extends Module
                     true,
                     [],
                     [
-                        'configure' => $this->name
+                        'configure' => $this->name,
+                        'submitBeyondsGitAjax' => 1,
                     ]
                 ),
                 'confirm_message' => $this->l('Cette branche semble une branche technique. Voulez-vous réaliser cette action ?'),
