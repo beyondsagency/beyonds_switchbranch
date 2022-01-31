@@ -92,7 +92,10 @@ class ConfigForm
     protected function getConfigForm()
     {
         $formDescription =
-            $this->module->l('Dans le champs css selector indiquez où la liste des branches doit s\'afficher')
+            '<ul>'.
+				'<li>'.$this->module->l('Assurez-vous que l\'utilisateur a des accèss necessaire pour exceuter la commande git').' <strong>: '.get_current_user().'</strong></li>
+            </ul>';
+
         ;
 
         return [
