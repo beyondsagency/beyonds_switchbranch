@@ -26,6 +26,8 @@
 use PHPUnit\Framework\TestCase;
 use PrestaShop\Module\Beyonds_switchbranch\Ajax\Response\AbstractResponse;
 use PrestaShop\Module\Beyonds_switchbranch\Ajax\Response\ResponseJsonPresenter;
+use PrestaShop\Module\Beyonds_switchbranch\Ajax\Response\DefaultResponseFactory;
+use PrestaShop\Module\Beyonds_switchbranch\Ajax\Response\DefaultResponse;
 
 final class ResponseTest extends TestCase {
 
@@ -65,6 +67,13 @@ final class ResponseTest extends TestCase {
 
             $presenter->present($response);
         }
+    }
+
+    public function testResponseFactory(){
+        $defaultResponseFactory = (new DefaultResponseFactory())->create('message', 1, []);
+        $response = new DefaultResponse('message', 1, []);
+
+        $this->assertEquals($defaultResponseFactory, $response);
     }
 
     private function getResponseData(){
