@@ -22,7 +22,7 @@
 
 1 - Implement a new git request 
 
-*`/src/Ajax/Request/Git/MyGitRequest.php`*
+*`/src/Ajax/Request/Git/DeleteBranch.php`*
 
 ```php
 
@@ -35,7 +35,7 @@ class DeleteBranch extends AbstractRequest
     public function exec($params = [])
     {
        $myBranchName = $params['my_branch_name'];
-       $this->gitClient->deleteBrach($myBranchName);
+       $this->gitClient->deleteBranch($myBranchName);
        // Catch possible errors
        // Set response infos 
     }
