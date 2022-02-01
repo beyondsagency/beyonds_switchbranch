@@ -22,7 +22,7 @@
 
 1 - Implement a new git request 
 
-*`/src/Ajax/Request/Git/MyGitRequest.php`*
+*`/src/Ajax/Request/Git/DeleteBranch.php`*
 
 ```php
 
